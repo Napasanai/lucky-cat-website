@@ -19,6 +19,9 @@
   width: 100%;
   max-width: 600px;
   max-height: 90vh;
+  /* Fallback for older browsers */
+  max-height: 85dvh;
+  /* Dynamic height respecting mobile browser bars */
   display: flex;
   flex-direction: column;
   overflow: hidden;
