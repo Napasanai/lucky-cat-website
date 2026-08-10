@@ -1,0 +1,86 @@
+.findus-section {
+  background-color: var(--color-bg-main);
+}
+
+.findus-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  background-color: var(--color-bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.findus-info {
+  padding: 50px;
+}
+
+.findus-info h2 {
+  font-size: 2.5rem;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+
+.findus-desc {
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+}
+
+.info-block {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.info-block i {
+  font-size: 1.8rem;
+  color: var(--color-accent);
+  background-color: rgba(212, 168, 67, 0.1);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.info-block h4 {
+  color: var(--color-text-light);
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.social-links a {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all var(--transition-fast);
+}
+
+.social-links a:hover {
+  background-color: var(--color-accent);
+  color: #000;
+  transform: translateY(-3px);
+}
+
+.findus-map {
+  min-height: 400px;
+}
+
+@media (max-width: 992px) {
+  .findus-grid {
+    grid-template-columns: 1fr;
+  }
+}
