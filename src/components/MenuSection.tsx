@@ -5,14 +5,14 @@ import MenuCard from './MenuCard';
 import MenuDetailModal from './MenuDetailModal';
 import './MenuSection.css';
 
-const categories = ['All', 'Thai', 'Japanese', 'Drinks'];
+const categories = ['All', 'Thai', 'National', 'Appetizer', 'Drink & Dessert'];
 
 const MenuSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
-  const filteredMenu = activeCategory === 'All' 
-    ? menuData 
+  const filteredMenu = activeCategory === 'All'
+    ? menuData
     : menuData.filter(item => item.category === activeCategory);
 
   return (
@@ -22,8 +22,8 @@ const MenuSection: React.FC = () => {
           <h2>Our Menu</h2>
           <div className="menu-filters">
             {categories.map(cat => (
-              <button 
-                key={cat} 
+              <button
+                key={cat}
                 className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
                 onClick={() => setActiveCategory(cat)}
               >
@@ -41,9 +41,9 @@ const MenuSection: React.FC = () => {
       </div>
 
       {selectedItem && (
-        <MenuDetailModal 
-          item={selectedItem} 
-          onClose={() => setSelectedItem(null)} 
+        <MenuDetailModal
+          item={selectedItem}
+          onClose={() => setSelectedItem(null)}
         />
       )}
     </section>

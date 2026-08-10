@@ -31,14 +31,14 @@
 }
 
 .filter-btn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .filter-btn.active {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  color: #000;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
 }
 
 .menu-grid {

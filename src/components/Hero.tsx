@@ -1,31 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Hero.css';
 
+const images = [
+  '/images/thai_dish.jpg',
+  '/images/national_dish.jpg',
+  '/images/appetizer.jpg',
+  '/images/drink_dessert.jpg',
+];
+
 const Hero: React.FC = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="hero">
+      {images.map((img, index) => (
+        <div 
+          key={img}
+          className={`hero-bg ${index === currentImageIndex ? 'active' : ''}`}
+          style={{ backgroundImage: `url(${img})` }}
+        />
+      ))}
       <div className="hero-overlay"></div>
       <div className="container hero-content animate-fade-in">
-        <h1>Build Your Perfect Plate</h1>
-        <p className="hero-sub">Pick your base. Choose 2–3 dishes. Ready in minutes.</p>
+        <h1>Welcome to<br />Lucky Cat</h1>
+        <p className="hero-sub">Experience the authentic and vibrant flavors of Asia.</p>
         
         <div className="hero-tags">
-          <span>Thai</span> &bull; <span>Japanese</span> &bull; <span>Ramen</span> &bull; <span>Sushi</span> &bull; <span>Near UVA</span>
-        </div>
-
-        <div className="hero-stats">
-          <div className="stat-item">
-            <i className="ti ti-bowl"></i>
-            <span>10+ dishes</span>
-          </div>
-          <div className="stat-item">
-            <i className="ti ti-coin"></i>
-            <span>From $8</span>
-          </div>
-          <div className="stat-item">
-            <i className="ti ti-clock"></i>
-            <span>Under 5 min</span>
-          </div>
+          <span className="hero-tag">Thai</span>
+          <span className="hero-tag">Chinese</span>
+          <span className="hero-tag">Korean</span>
+          <span className="hero-tag">Near UVA</span>
         </div>
 
         <div className="hero-actions">
