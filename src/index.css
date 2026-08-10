@@ -2,18 +2,21 @@
 @import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/tabler-icons.min.css');
 
 :root {
-  --color-bg-main: #0A2E1E;
-  --color-bg-card: #0D3D2B;
-  --color-bg-alt: #0B3323;
-  --color-accent: #D4A843;
+  --color-bg-main: #ffffff;
+  --color-bg-card: #f9f9f9;
+  --color-bg-alt: #f0f0f0;
+  --color-primary: #1E5631;
+  --color-primary-hover: #297a44;
+  --color-accent: #f2c354;
   --color-accent-hover: #e8bd54;
-  --color-text-body: #8ab5a0;
-  --color-text-sec: #5a8a72;
-  --color-text-light: #ffffff;
-  
+  --color-text-menu: #daa321;
+  --color-text-body: #333333;
+  --color-text-sec: #666666;
+  --color-text-light: #111111;
+
   --font-heading: 'Cinzel', serif;
   --font-body: 'Inter', sans-serif;
-  
+
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
 }
@@ -24,15 +27,30 @@
   padding: 0;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-bg-main);
   color: var(--color-text-body);
   font-family: var(--font-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  padding-top: 80px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   color: var(--color-text-light);
   font-weight: 600;
@@ -59,8 +77,8 @@ button {
 }
 
 .btn-primary {
-  background-color: var(--color-accent);
-  color: #000;
+  background-color: var(--color-primary);
+  color: #ffffff;
   padding: 12px 28px;
   border-radius: 4px;
   font-weight: 600;
@@ -70,7 +88,7 @@ button {
 }
 
 .btn-primary:hover {
-  background-color: var(--color-accent-hover);
+  background-color: var(--color-primary-hover);
   transform: translateY(-2px);
 }
 
@@ -90,15 +108,27 @@ button {
   color: #000;
 }
 
-/* Section Spacing */
 .section-padding {
   padding: 80px 0;
 }
 
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 50px 0;
+  }
+}
+
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {

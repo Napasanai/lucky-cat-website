@@ -3,7 +3,7 @@
 }
 
 .promo-card {
-  background: linear-gradient(135deg, var(--color-bg-card), #124d38);
+  background: linear-gradient(135deg, var(--color-primary), #0a2614);
   border-radius: 20px;
   padding: 50px;
   display: flex;
@@ -29,12 +29,13 @@
 .promo-content h2 {
   font-size: 2.5rem;
   margin-bottom: 15px;
+  color: #ffffff;
 }
 
 .promo-content p {
   font-size: 1.2rem;
   margin-bottom: 20px;
-  color: var(--color-text-light);
+  color: #eeeeee;
 }
 
 .promo-terms {
@@ -48,7 +49,7 @@
   align-items: center;
   gap: 8px;
   font-size: 0.95rem;
-  color: var(--color-text-body);
+  color: #eeeeee;
 }
 
 .promo-terms i {

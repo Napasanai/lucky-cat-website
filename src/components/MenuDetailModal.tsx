@@ -30,44 +30,46 @@ const MenuDetailModal: React.FC<MenuDetailModalProps> = ({ item, onClose }) => {
         <button className="modal-close" onClick={onClose}>
           <i className="ti ti-x"></i>
         </button>
-        
-        <div className="modal-image" style={{ backgroundImage: `url(${item.image})` }}></div>
-        
-        <div className="modal-body">
-          <h2>{item.name}</h2>
-          <p className="modal-desc">{item.description}</p>
-          
-          {item.addOns && item.addOns.length > 0 && (
-            <div className="addons-section">
-              <h3>Add-ons</h3>
-              <ul className="addons-list">
-                {item.addOns.map(addon => (
-                  <li key={addon.id} className="addon-item" onClick={() => toggleAddOn(addon.id)}>
-                    <label className="checkbox-container">
-                      <input 
-                        type="checkbox" 
-                        checked={selectedAddOns.has(addon.id)} 
-                        readOnly 
-                      />
-                      <span className="checkmark"></span>
-                      <span className="addon-name">{addon.name}</span>
-                    </label>
-                    <span className="addon-price">
-                      {addon.price > 0 ? `+$${addon.price.toFixed(2)}` : 'Free'}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
 
-          <div className="modal-footer">
-            <div className="total-price">
-              <span>Total: </span>
-              <strong>${totalPrice.toFixed(2)}</strong>
-            </div>
-            <button className="btn-primary" onClick={onClose}>Add to Order</button>
+        <div className="modal-scroll-area">
+          <div className="modal-image" style={{ backgroundImage: `url(${item.image})` }}></div>
+
+          <div className="modal-body">
+            <h2>{item.name}</h2>
+            <p className="modal-desc">{item.description}</p>
+
+            {item.addOns && item.addOns.length > 0 && (
+              <div className="addons-section">
+                <h3>Add-ons</h3>
+                <ul className="addons-list">
+                  {item.addOns.map(addon => (
+                    <li key={addon.id} className="addon-item" onClick={() => toggleAddOn(addon.id)}>
+                      <label className="checkbox-container">
+                        <input
+                          type="checkbox"
+                          checked={selectedAddOns.has(addon.id)}
+                          readOnly
+                        />
+                        <span className="checkmark"></span>
+                        <span className="addon-name">{addon.name}</span>
+                      </label>
+                      <span className="addon-price">
+                        {addon.price > 0 ? `+$${addon.price.toFixed(2)}` : 'Free'}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
+        </div>
+
+        <div className="modal-footer">
+          <div className="total-price">
+            <span>Total: </span>
+            <strong>${totalPrice.toFixed(2)}</strong>
+          </div>
+          <button className="btn-primary" onClick={onClose}>Add to Order</button>
         </div>
       </div>
     </div>

@@ -6,10 +6,10 @@ const Footer: React.FC = () => {
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
-          <div className="footer-logo">
+          <a href="#" className="footer-logo">
             <i className="ti ti-cat"></i>
             <span>Lucky Cat</span>
-          </div>
+          </a>
           <p className="footer-copyright">
             &copy; {new Date().getFullYear()} Lucky Cat Asian Food. All rights reserved.
           </p>
