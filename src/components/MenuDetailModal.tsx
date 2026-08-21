@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import type { MenuItem } from '../data/menu';
+import type { MenuItem, AddOnType } from '../data/menu';
+import { useCart } from '../context/CartContext';
 import './MenuDetailModal.css';
 
 interface MenuDetailModalProps {
@@ -8,21 +9,47 @@ interface MenuDetailModalProps {
 }
 
 const MenuDetailModal: React.FC<MenuDetailModalProps> = ({ item, onClose }) => {
-  const [selectedAddOns, setSelectedAddOns] = useState<Set<string>>(new Set());
+  const { addToCart } = useCart();
+  // Map of groupId -> Set of selected option IDs
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, Set<string>>>({});
 
-  const toggleAddOn = (id: string) => {
-    const newSet = new Set(selectedAddOns);
-    if (newSet.has(id)) {
-      newSet.delete(id);
-    } else {
-      newSet.add(id);
-    }
-    setSelectedAddOns(newSet);
+  const toggleOption = (groupId: string, optionId: string, type: AddOnType) => {
+    setSelectedOptions(prev => {
+      const groupSelections = new Set(prev[groupId] || []);
+      
+      if (type === 'radio') {
+        groupSelections.clear();
+        groupSelections.add(optionId);
+      } else {
+        if (groupSelections.has(optionId)) {
+          groupSelections.delete(optionId);
+        } else {
+          groupSelections.add(optionId);
+        }
+      }
+      
+      return { ...prev, [groupId]: groupSelections };
+    });
   };
 
-  const totalPrice = item.price + (item.addOns || []).reduce((acc, addOn) => {
-    return selectedAddOns.has(addOn.id) ? acc + addOn.price : acc;
-  }, 0);
+  let addOnsTotal = 0;
+  if (item.addOnGroups) {
+    item.addOnGroups.forEach(group => {
+      const selections = selectedOptions[group.id] || new Set();
+      group.options.forEach(opt => {
+        if (selections.has(opt.id)) {
+          addOnsTotal += opt.price;
+        }
+      });
+    });
+  }
+  
+  const totalPrice = item.price + addOnsTotal;
+
+  const handleAddToOrder = () => {
+    addToCart(item, selectedOptions);
+    onClose();
+  };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -38,29 +65,42 @@ const MenuDetailModal: React.FC<MenuDetailModalProps> = ({ item, onClose }) => {
             <h2>{item.name}</h2>
             <p className="modal-desc">{item.description}</p>
 
-            {item.addOns && item.addOns.length > 0 && (
-              <div className="addons-section">
-                <h3>Add-ons</h3>
+            {item.addOnGroups && item.addOnGroups.map(group => (
+              <div key={group.id} className="addons-section">
+                <h3>{group.name}</h3>
                 <ul className="addons-list">
-                  {item.addOns.map(addon => (
-                    <li key={addon.id} className="addon-item" onClick={() => toggleAddOn(addon.id)}>
-                      <label className="checkbox-container">
-                        <input
-                          type="checkbox"
-                          checked={selectedAddOns.has(addon.id)}
-                          readOnly
-                        />
-                        <span className="checkmark"></span>
-                        <span className="addon-name">{addon.name}</span>
-                      </label>
-                      <span className="addon-price">
-                        {addon.price > 0 ? `+$${addon.price.toFixed(2)}` : 'Free'}
-                      </span>
-                    </li>
-                  ))}
+                  {group.options.map(option => {
+                    const isSelected = (selectedOptions[group.id] || new Set()).has(option.id);
+                    return (
+                      <li key={option.id} className="addon-item" onClick={() => toggleOption(group.id, option.id, group.type)}>
+                        <label className="checkbox-container">
+                          {group.type === 'radio' ? (
+                            <input
+                              type="radio"
+                              name={group.id}
+                              checked={isSelected}
+                              readOnly
+                              style={{ borderRadius: '50%' }}
+                            />
+                          ) : (
+                            <input
+                              type="checkbox"
+                              checked={isSelected}
+                              readOnly
+                            />
+                          )}
+                          <span className={group.type === 'radio' ? 'radiomark' : 'checkmark'}></span>
+                          <span className="addon-name">{option.name}</span>
+                        </label>
+                        <span className="addon-price">
+                          {option.price > 0 ? `+$${option.price.toFixed(2)}` : 'Free'}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
-            )}
+            ))}
           </div>
         </div>
 
@@ -69,7 +109,7 @@ const MenuDetailModal: React.FC<MenuDetailModalProps> = ({ item, onClose }) => {
             <span>Total: </span>
             <strong>${totalPrice.toFixed(2)}</strong>
           </div>
-          <button className="btn-primary" onClick={onClose}>Add to Order</button>
+          <button className="btn-primary" onClick={handleAddToOrder}>Add to Order</button>
         </div>
       </div>
     </div>

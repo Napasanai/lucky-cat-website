@@ -14,7 +14,7 @@ const FindUs: React.FC = () => {
               <i className="ti ti-map-pin"></i>
               <div>
                 <h4>Address</h4>
-                <p>123 University Ave<br/>Charlottesville, VA 22903</p>
+                <p>946 Grady Ave Ste O<br/>Charlottesville, VA 22903</p>
               </div>
             </div>
             
@@ -22,7 +22,12 @@ const FindUs: React.FC = () => {
               <i className="ti ti-clock"></i>
               <div>
                 <h4>Hours</h4>
-                <p>Mon-Fri: 11:00 AM - 10:00 PM<br/>Sat-Sun: 12:00 PM - 11:00 PM</p>
+                <p>
+                  Mon: Closed<br/>
+                  Tue - Thu: 11:00 AM - 9:00 PM<br/>
+                  Fri - Sat: 11:00 AM - 10:00 PM<br/>
+                  Sun: 11:00 AM - 9:00 PM
+                </p>
               </div>
             </div>
             
@@ -43,7 +48,7 @@ const FindUs: React.FC = () => {
           
           <div className="findus-map">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100378.07727376722!2d-78.53696887556942!3d38.03454728560126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b38622f6bf3c29%3A0xc3e658ec35058ec0!2sUniversity%20of%20Virginia!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+              src="https://maps.google.com/maps?q=946%20Grady%20Ave%20Ste%20O,%20Charlottesville,%20VA%2022903&t=&z=15&ie=UTF8&iwloc=&output=embed" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
