@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useCart } from '../context/CartContext';
 import './Navbar.css';
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { toggleCart, itemCount } = useCart();
 
   return (
     <nav className="navbar">
@@ -12,17 +14,31 @@ const Navbar: React.FC = () => {
           <span>Lucky Cat</span>
         </a>
         
-        <button className="mobile-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          <i className={`ti ${isMobileMenuOpen ? 'ti-x' : 'ti-menu-2'}`}></i>
-        </button>
+        <div className="navbar-actions-mobile">
+          <button className="cart-btn-mobile mobile-only" onClick={toggleCart}>
+            <i className="ti ti-shopping-cart"></i>
+            {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
+          </button>
+          <button className="mobile-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            <i className={`ti ${isMobileMenuOpen ? 'ti-x' : 'ti-menu-2'}`}></i>
+          </button>
+        </div>
 
         <ul className={`navbar-links ${isMobileMenuOpen ? 'active' : ''}`}>
           <li><a href="#menu" onClick={() => setIsMobileMenuOpen(false)}>Menu</a></li>
           <li><a href="#promo" onClick={() => setIsMobileMenuOpen(false)}>Promotions</a></li>
           <li><a href="#find-us" onClick={() => setIsMobileMenuOpen(false)}>Find Us</a></li>
-          <li className="mobile-only"><button className="btn-primary">Order Now</button></li>
+          <li className="mobile-only">
+            <button className="btn-primary" style={{ width: '100%', marginTop: '10px' }} onClick={() => { setIsMobileMenuOpen(false); toggleCart(); }}>
+              View Order ({itemCount})
+            </button>
+          </li>
         </ul>
-        <button className="btn-primary desktop-only">Order Now</button>
+
+        <button className="cart-btn-desktop desktop-only" onClick={toggleCart}>
+          <i className="ti ti-shopping-cart"></i>
+          {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
+        </button>
       </div>
     </nav>
   );

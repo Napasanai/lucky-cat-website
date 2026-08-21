@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Hero.css';
 
 const images = [
-  '/images/thai_dish.jpg',
-  '/images/national_dish.jpg',
-  '/images/appetizer.jpg',
-  '/images/drink_dessert.jpg',
+  '/images/thai_dish.webp',
+  '/images/national_dish.webp',
+  '/images/appetizer.webp',
+  '/images/drink_dessert.webp',
 ];
 
 const Hero: React.FC = () => {
